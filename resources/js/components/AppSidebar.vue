@@ -1,12 +1,31 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+import { usePage } from '@inertiajs/vue3';
 import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import { BookOpen, LayoutGrid } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  is_admin: boolean;
+}
+
+interface PageProps {
+  auth: {
+    user: User;
+  };
+  [key: string]: any;
+}
+
+const page = usePage<PageProps>();
+const user = computed(() => page.props.auth.user);
 
 const mainNavItems: NavItem[] = [
     {
@@ -16,18 +35,18 @@ const mainNavItems: NavItem[] = [
     },
 ];
 
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Github Repo',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
-    },
-];
+const footerNavItems = computed(() => {
+    if (user.value.is_admin) {
+        return [
+            {
+                title: 'Admin',
+                href: '/admin/store-hours',
+                icon: BookOpen,
+            },
+        ];
+    }
+    return [];
+});
 </script>
 
 <template>
@@ -36,7 +55,7 @@ const footerNavItems: NavItem[] = [
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg" as-child>
-                        <Link :href="route('dashboard')">
+                        <Link :href="route('home')">
                             <AppLogo />
                         </Link>
                     </SidebarMenuButton>
