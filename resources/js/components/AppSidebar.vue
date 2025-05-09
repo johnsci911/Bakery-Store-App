@@ -7,7 +7,7 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, LayoutGrid } from 'lucide-vue-next';
+import { Bell, LayoutGrid, Shield, User } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 interface User {
@@ -38,9 +38,9 @@ const mainNavItems: NavItem[] = [
 const footerNavItems = computed(() => {
     const adminLinks = [
         {
-            title: 'Store Hours',
+            title: 'Admin - Store Hours',
             href: '/admin/store-hours',
-            icon: BookOpen,
+            icon: Shield,
         },
     ];
 
@@ -48,12 +48,12 @@ const footerNavItems = computed(() => {
         {
             title: 'Notification Preferences',
             href: '/user/notification-preferences',
-            icon: BookOpen,
+            icon: Bell,
         }
     ]
 
     if (user.value.is_admin) {
-        return [...adminLinks, ...mainLinks];
+        return [...mainLinks, ...adminLinks];
     } else {
         return mainLinks;
     }

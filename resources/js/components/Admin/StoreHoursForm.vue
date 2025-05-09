@@ -43,7 +43,7 @@ const submit = () => {
 <template>
   <form @submit.prevent="submit">
     <div v-for="day in ['monday', 'wednesday', 'friday'] as Day[]" :key="day" class="mb-4">
-      <label :for="day" class="block mb-2 text-sm font-medium text-gray-700">
+      <label :for="day" class="block mb-2 text-sm font-medium text-gray-200">
         {{ day.charAt(0).toUpperCase() + day.slice(1) }}
       </label>
       <input
@@ -56,7 +56,7 @@ const submit = () => {
     </div>
 
     <div class="mb-4">
-      <label for="saturday" class="block mb-2 text-sm font-medium text-gray-700">Saturday</label>
+      <label for="saturday" class="block mb-2 text-sm font-medium text-gray-200">Saturday</label>
       <div class="flex items-center mb-2">
         <input
           id="isEveryOtherSaturday"
@@ -64,7 +64,7 @@ const submit = () => {
           type="checkbox"
           class="mr-2"
         >
-        <label for="isEveryOtherSaturday" class="text-sm text-gray-700">Every other Saturday</label>
+        <label for="isEveryOtherSaturday" class="text-sm text-gray-200">Every other Saturday</label>
       </div>
       <input
         id="saturday"
