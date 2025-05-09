@@ -10,13 +10,13 @@ use Illuminate\Console\Command;
 
 class SendStoreReopeningNotifications extends Command
 {
-    protected $signature = 'notifications:store-reopening {date}';
-    protected $description = 'Send store reopening notifications to users';
+    protected $signature = 'notifications:store-reopening';
+    protected $description = 'Send store reopening notifications to users for today';
 
     public function handle()
     {
-        $reopeningDate = Carbon::parse($this->argument('date'));
-        $dayOfWeek = strtolower($reopeningDate->format('l')); // Get the day of the week
+        $today = Carbon::now();
+        $dayOfWeek = strtolower($today->format('l')); // Get the day of the week
 
         $storeHours = StoreHours::where('day', $dayOfWeek)->first();
 
@@ -33,17 +33,22 @@ class SendStoreReopeningNotifications extends Command
         }
 
         foreach ($openingHours as $period) {
-            $openingTime = $reopeningDate->copy()->setTimeFromTimeString($period['start']);
+            $openingTime = $today->copy()->setTimeFromTimeString($period['start']);
 
-            User::whereHas('notificationPreferences', function ($query) {
-                $query->where('is_enabled', true);
-            })->chunk(100, function ($users) use ($openingTime) {
-                foreach ($users as $user) {
-                    $user->notify(new StoreReopenedNotification($openingTime->format('F d, Y, g:i A')));
-                }
-            });
+            // Only send notifications if the opening time is in the future
+            if ($openingTime->isFuture()) {
+                User::whereHas('notificationPreferences', function ($query) {
+                    $query->where('is_enabled', true);
+                })->chunk(100, function ($users) use ($openingTime) {
+                    foreach ($users as $user) {
+                        $user->notify(new StoreReopenedNotification($openingTime->format('D, F d, Y, g:i A')));
+                    }
+                });
 
-            $this->info("Notifications sent for opening time: {$openingTime->format('F d, Y, g:i A')}");
+                $this->info("Notifications sent for opening time: {$openingTime->format('D, F d, Y, g:i A')}");
+            } else {
+                $this->info("Skipped past opening time: {$openingTime->format('D, F d, Y, g:i A')}");
+            }
         }
     }
 
