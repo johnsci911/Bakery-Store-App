@@ -29,7 +29,7 @@ onMounted(fetchOpeningHours);
 </script>
 
 <template>
-  <div class="opening-hours text-white">
+  <div class="opening-hours text-gray-200">
     <h3 class="text-lg font-semibold mb-2">Opening Hours</h3>
     <ul>
       <li>Monday: {{ openingHours.monday }}</li>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import OpeningHours from '@/components/OpeningHours.vue';
+import StoreLiveStatus from '@/components/StoreLiveStatus.vue';
 import { Head, Link } from '@inertiajs/vue3';
 </script>
 
@@ -37,9 +38,14 @@ import { Head, Link } from '@inertiajs/vue3';
         <div class="duration-750 starting:opacity-0 flex w-full items-center justify-center opacity-100 transition-opacity lg:grow">
             <main class="flex w-full max-w-[335px] flex-col overflow-hidden rounded-lg lg:max-w-4xl">
                 <!-- Welcome message -->
-                <h1 class="text-3xl font-semibold text-[#1b1b18] dark:text-[#EDEDEC]">Welcome to <span class="text-blue-500">EuroBreads!</span></h1>
+                <div class="mx-auto">
+                    <h1 class="text-5xl font-semibold text-[#1b1b18] dark:text-[#EDEDEC]">Welcome to <span class="text-blue-500">EuroBreads!</span></h1>
+                </div>
+                <div class="mt-40 mb-4">
+                    <StoreLiveStatus />
+                </div>
                 <!-- Opening hours component -->
-                <OpeningHours class="mt-10" />
+                <OpeningHours />
             </main>
         </div>
         <div class="h-14.5 hidden lg:block"></div>
