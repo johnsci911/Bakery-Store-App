@@ -36,16 +36,27 @@ const mainNavItems: NavItem[] = [
 ];
 
 const footerNavItems = computed(() => {
+    const adminLinks = [
+        {
+            title: 'Store Hours',
+            href: '/admin/store-hours',
+            icon: BookOpen,
+        },
+    ];
+
+    const mainLinks = [
+        {
+            title: 'Notification Preferences',
+            href: '/user/notification-preferences',
+            icon: BookOpen,
+        }
+    ]
+
     if (user.value.is_admin) {
-        return [
-            {
-                title: 'Admin',
-                href: '/admin/store-hours',
-                icon: BookOpen,
-            },
-        ];
+        return [...adminLinks, ...mainLinks];
+    } else {
+        return mainLinks;
     }
-    return [];
 });
 </script>
 

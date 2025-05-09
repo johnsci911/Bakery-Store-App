@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    use Notifiable;
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
@@ -45,5 +47,18 @@ class User extends Authenticatable
             'is_admin' => 'boolean',
             'password' => 'hashed',
         ];
+    }
+
+    public function notificationPreferences()
+    {
+        return $this->hasMany(UserNotification::class);
+    }
+
+    public function hasNotificationEnabled($type)
+    {
+        return $this->notificationPreferences()
+            ->where('notification_type', $type)
+            ->where('is_enabled', true)
+            ->exists();
     }
 }
