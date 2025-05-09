@@ -3,7 +3,7 @@ import { useForm, router } from '@inertiajs/vue3';
 import { PropType, ref, watch } from 'vue';
 
 interface NotificationPreferences {
-  store_reopen: boolean;
+  store_reopen: number;
 }
 
 const props = defineProps({
@@ -18,7 +18,7 @@ interface FormData {
 }
 
 const form = useForm<FormData>({
-  store_reopen_notification: props.notificationPreferences.store_reopen
+  store_reopen_notification: Boolean(props.notificationPreferences.store_reopen)
 });
 
 const successMessage = ref('');
@@ -49,8 +49,7 @@ watch(() => form.store_reopen_notification, (newValue, oldValue) => {
 });
 
 const goBack = () => {
-  router.visit(route('dashboard')); // Assuming you have a named route for dashboard
-  // Alternatively, use: router.visit(document.referrer);
+  router.visit(route('dashboard'));
 }
 </script>
 
@@ -69,7 +68,7 @@ const goBack = () => {
             type="checkbox"
             class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 h-5 w-5"
           />
-          <span class="ml-2 text-gray-500">Notify me when the store reopens</span>
+          <span class="ml-2 text-gray-200">Notify me when the store re-opens</span>
         </label>
       </div>
       <div v-if="form.errors.store_reopen_notification" class="text-red-500 text-sm mt-1">
