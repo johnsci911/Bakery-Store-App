@@ -40,7 +40,7 @@ const displayHours = computed(() => {
 </script>
 
 <template>
-  <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 flex flex-col justify-items-center">
+  <div class="mt-4 bg-gray-900 shadow rounded-lg p-6 flex flex-col justify-items-center">
     <p class="text-lg mb-2 text-gray-600 dark:text-gray-300">{{ formattedDate }}</p>
     <p class="text-xl font-medium text-gray-800 dark:text-white">
       {{ displayHours }}

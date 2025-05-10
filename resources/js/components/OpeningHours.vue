@@ -30,8 +30,8 @@ onMounted(fetchOpeningHours);
 
 <template>
   <div class="opening-hours text-gray-200">
-    <h3 class="text-lg font-semibold mb-2">Opening Hours</h3>
-    <ul>
+    <h1 class="text-2xl font-bold mb-4">Opening Hours</h1>
+    <ul class="text-gray-400">
       <li>Monday: {{ openingHours.monday }}</li>
       <li>Wednesday: {{ openingHours.wednesday }}</li>
       <li>Friday: {{ openingHours.friday }}</li>
