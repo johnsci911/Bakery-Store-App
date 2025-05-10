@@ -2,7 +2,7 @@
 
 use App\Models\StoreHours;
 
-const API_ENDPOINT = '/api/store-hours';
+const API_ENDPOINT = '/api/v1/store-hours';
 const MONDAY_HOURS = '8:00 AM - 12:00 PM, 12:45 PM - 4:00 PM';
 const WEDNESDAY_HOURS = '9:00 AM - 5:00 PM';
 const FRIDAY_HOURS = '8:00 AM - 12:00 PM, 1:00 PM - 5:00 PM';

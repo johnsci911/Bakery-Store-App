@@ -47,19 +47,20 @@ const selectedDate = ref(new Date());
                 <div class="mx-auto">
                     <h1 class="text-5xl font-semibold text-[#1b1b18] dark:text-[#EDEDEC]">Welcome to <span class="text-blue-500">EuroBreads!</span></h1>
                 </div>
-                <div class="mt-40 mb-4">
-                    <StoreLiveStatus />
+                <div class="flex flex-col p-4 border border-green-500 rounded-xl mt-12">
+                    <div class="flex flex-row my-4 space-x-4">
+                        <div>
+                            <OpeningHours :selected-date="selectedDate" />
+                        </div>
+                        <div class="flex flex-col w-1/2">
+                            <h1 class="text-white text-2xl font-bold mb-4 text-center">Select a date to show store hours</h1>
+                            <Datepicker v-model="selectedDate" :enable-time-picker="false" :dark="$page.props.darkMode" />
+                            <SelectedOpeningHours :selected-date="selectedDate" />
+                        </div>
+                    </div>
+                    <StoreLiveStatus class="mt-20 mb-8 w-2/3 mx-auto" />
                 </div>
-                <OpeningHours :selected-date="selectedDate" />
-
             </main>
-        </div>
-        <div class="flex flex-col">
-            <h1 class="text-white text-2xl font-bold mb-4 text-center">Select a date to show store hours</h1>
-            <Datepicker v-model="selectedDate" :enable-time-picker="false" :dark="$page.props.darkMode" />
-            <div class="my-4 w">
-                <SelectedOpeningHours :selected-date="selectedDate" />
-            </div>
         </div>
         <div class="h-14.5 hidden lg:block">
         </div>

@@ -14,7 +14,7 @@ const storeHours = ref({});
 
 const fetchStoreHours = async () => {
   try {
-    const response = await axios.get('/api/store-hours');
+    const response = await axios.get('/api/v1/store-hours');
     storeHours.value = response.data;
   } catch (error) {
     console.error('Failed to fetch store hours:', error);

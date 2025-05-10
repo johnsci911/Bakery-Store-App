@@ -18,7 +18,7 @@ const openingHours = ref<OpeningHours>({
 
 const fetchOpeningHours = async () => {
   try {
-    const response = await axios.get('/api/store-hours');
+    const response = await axios.get('/api/v1/store-hours');
     openingHours.value = response.data;
   } catch (error) {
     console.error('Failed to fetch opening hours:', error);
