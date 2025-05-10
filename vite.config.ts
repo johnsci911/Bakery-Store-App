@@ -22,6 +22,12 @@ export default defineConfig({
             },
         }),
     ],
+    server: {
+        host: 'eurobreads.test',
+        hmr: {
+            host: 'eurobreads.test',
+        },
+    },
     resolve: {
         alias: {
             '@': path.resolve(__dirname, './resources/js'),
