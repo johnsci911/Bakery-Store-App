@@ -98,7 +98,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="p-4 rounded-xl border w-1/2 text-gray-200" :class="isOpen ? 'border-green-500' : 'border-red-500'">
+  <div class="p-4 rounded-xl border text-gray-200" :class="isOpen ? 'border-green-500' : 'border-red-500'">
     <h3 class="text-lg font-semibold mb-2">Store Status</h3>
     <p :class="isOpen ? 'text-green-700' : 'text-red-700'">
       Currently {{ statusText }}

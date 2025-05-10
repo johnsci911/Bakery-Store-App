@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import OpeningHours from '@/components/OpeningHours.vue';
+import SelectedOpeningHours from '@/components/SelectedOpeningHours.vue';
 import StoreLiveStatus from '@/components/StoreLiveStatus.vue';
 import { Head, Link } from '@inertiajs/vue3';
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
+import { ref } from 'vue';
+
+const selectedDate = ref(new Date());
 </script>
 
 <template>
@@ -44,10 +50,41 @@ import { Head, Link } from '@inertiajs/vue3';
                 <div class="mt-40 mb-4">
                     <StoreLiveStatus />
                 </div>
-                <!-- Opening hours component -->
-                <OpeningHours />
+                <OpeningHours :selected-date="selectedDate" />
+
             </main>
         </div>
-        <div class="h-14.5 hidden lg:block"></div>
+        <div class="flex flex-col">
+            <h1 class="text-white text-2xl font-bold mb-4 text-center">Select a date to show store hours</h1>
+            <Datepicker v-model="selectedDate" :enable-time-picker="false" :dark="$page.props.darkMode" />
+            <div class="my-4 w">
+                <SelectedOpeningHours :selected-date="selectedDate" />
+            </div>
+        </div>
+        <div class="h-14.5 hidden lg:block">
+        </div>
     </div>
 </template>
+
+<style>
+.dp__theme_dark {
+    --dp-background-color: #1a1a1a;
+    --dp-text-color: #f5f5f5;
+    --dp-hover-color: #2f2f2f;
+    --dp-hover-text-color: #f5f5f5;
+    --dp-hover-icon-color: #f5f5f5;
+    --dp-primary-color: #3b82f6;
+    --dp-primary-text-color: #f5f5f5;
+    --dp-secondary-color: #2f2f2f;
+    --dp-border-color: #3f3f3f;
+    --dp-menu-border-color: #3f3f3f;
+    --dp-border-color-hover: #5f5f5f;
+    --dp-disabled-color: #4f4f4f;
+    --dp-scroll-bar-background: #2f2f2f;
+    --dp-scroll-bar-color: #5f5f5f;
+    --dp-success-color: #4caf50;
+    --dp-success-color-disabled: #4caf5080;
+    --dp-icon-color: #f5f5f5;
+    --dp-danger-color: #ff6b6b;
+}
+</style>
